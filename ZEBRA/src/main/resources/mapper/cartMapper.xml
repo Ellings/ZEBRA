@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.java.mapper.CartMapper">
+
+<!-- 카트 추가 -->
+<insert id="addCart">
+
+	insert into cart(CARTID, MID, pno, cartCount)
+	values(CART_SEQ.NEXTVAL, #{MID}, #{pno}, #{cartCount}) 
+
+</insert>
+
+
+<!-- 카트 삭제 -->
+<delete id="deleteCart">
+
+	delete from cart where cartId = #{cartId}
+
+</delete>
+
+<!-- 카트 수량 수정 -->
+<update id="modifyCount">
+
+	update cart set cartCount=#{cartCount} where cartId = #{cartId}
+
+</update>
+
+
+<!-- 카트 목록 -->
+<select id="getCart" resultType="com.java.dto.CartDTO">
+	SELECT c.*, m.*, p.*, c.cartId, c.cartCount, m.MID, p.pno, p.pname, p.pprice
+	FROM cart c
+	INNER JOIN zebra m ON c.MID = m.MID
+	INNER JOIN product p ON c.pno = p.pno
+	where m.MID = #{MID}		     
+</select>
+
+<!-- 카트 확인 -->
+<select id="checkCart" resultType="com.java.dto.CartDTO">
+	select * from cart 
+	where MID = #{MID} and pno = #{pno}
+</select>
+
+<!-- 카트 ONO 업데이트 -->
+<update id="updateONO">
+	update cart set ONO = #{ONO} where MID=#{MID} and cartId=#{cartId}
+	</update> 
+	
+	
+
+</mapper>

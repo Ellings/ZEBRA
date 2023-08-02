@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.OrderMapper">
+
+<!-- 주문 상품 정보 -->
+	<select id="getGoodsInfo" resultType="com.java.dto.OrderPageItemDTO">
+	
+		select pno, pName, pprice
+		from product where MID = #{MID}	
+	
+	</select>
+
+<!-- 수령인 정보 1개 저장하기 -->
+<insert id="insertOne">
+<selectKey resultType="int" keyProperty="ono" order="BEFORE">
+          select ORDER_SEQ_NUM.nextval from dual
+     </selectKey>
+   insert into ZEBRAORDER (ONO, ONAME, OZIP, OADDR1, OADDR2, 
+      OHP1, OHP2, OHP3, ORHP1, ORHP2, ORHP3, OWANT, OPAYMENT, MID, ODATE,OSTATUS)
+   values (#{ONO}, #{ONAME}, #{OZIP}, #{OADDR1}, #{OADDR2},
+      #{OHP1},#{OHP2},#{OHP3},#{ORHP1},#{ORHP2},#{ORHP3}, #{OWANT}, #{OPAYMENT}, #{MID},SYSDATE,#{OSTATUS})
+</insert>
+
+
+<!-- 수령인 정보 1개 가져오기 -->
+<select resultType="com.java.dto.OrderDto" id="selectOne">
+select * from zebraorder where ono=#{ono} 
+</select>
+	
+
+
+
+</mapper>

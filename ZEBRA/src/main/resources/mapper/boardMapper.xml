@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.BoardMapper">
+  
+  <!-- 총 물품 개수 -->
+<select id="selectProductCount" resultType="int">
+    select count(*) as allProductCount from product
+</select>
+  
+  <!-- 페이지 1개 가져오기 -->
+  <select id="selectOne" resultType="com.java.dto.ProductDto">
+     select * from product where pno=#{pno}
+  </select>
+  
+  <!-- 하단댓글 전체가져오기 -->
+  <select id="selectComAll" resultType="com.java.dto.CommentDto">
+     select * from commentproduct where pno=#{pno} order by cno desc
+  </select>
+  
+  <!-- 하단댓글 저장 -->
+  <insert id="commentInsert">
+     <selectKey resultType="int" keyProperty="cno" order="BEFORE">
+          select pcomment_seq.nextval from dual
+     </selectKey>
+     insert into commentproduct values
+     (#{cno},#{pno},#{mid},#{cpw},#{ccontent},sysdate ) 
+  </insert>
+  
+  <!-- 하단댓글 1개가져오기 -->
+  <select id="selectComOne" resultType="com.java.dto.CommentDto">
+     select * from commentproduct where cno=#{cno}
+  </select>
+  
+  <!-- 하단댓글 1개삭제 -->
+  <delete id="commentDelete">
+     delete commentproduct where cno=#{cno}
+  </delete>
+  
+  <!-- 하단댓글 수정저장 -->
+  <update id="commentUpdateSave">
+     update commentproduct set cpw=#{cpw},ccontent=#{ccontent},cdate=sysdate where cno=#{cno}
+  </update>
+</mapper>

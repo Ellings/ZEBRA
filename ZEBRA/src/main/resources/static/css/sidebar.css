@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.xi-user-o:before {
+    content: "\e9f5"
+}
+
+.xi-users-o:before {
+    content: "\ea04"
+}
+
+.xi-user-plus-o:before {
+    content: "\e9f8"
+}
+
+
+.bottom_fixed_menu {
+    position: fixed;
+    bottom: 20px;
+    right: 16px;
+    width: 40px;
+    text-align: center;
+    z-index: 10;
+}
+
+/*html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
+    margin: 0;
+    padding: 0;
+}
+.bottom_fixed_menu {
+}
+
+user agent stylesheet
+div {
+    display: block;
+}
+
+.bottom_fixed_menu ul {
+    border: 1px solid #dfdfdf;
+    box-sizing: border-box;
+}
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
+    margin: 0;
+    padding: 0;
+}
+user agent stylesheet
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+[class*=" xi-"], [class^=xi-] {
+    font-family: xeicon!important;
+    display: inline-block;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+user agent stylesheet
+i {
+    font-style: italic;
+}
+
+ 
+
+*/
