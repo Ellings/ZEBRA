@@ -14,7 +14,11 @@ public interface CartMapper {
 	public int addCart(CartDTO cart) throws Exception;
 		
 	/* 카트 삭제 */
+<<<<<<< HEAD
 	int deleteCart(int cartId);
+=======
+	void deleteCart(int cartId);
+>>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 	
 	/* 카트 수량 수정 */
 	public int modifyCount(CartDTO cart);

@@ -157,7 +157,11 @@
                       
                       <c:forEach var="mdto" items="${list}"> <!-- var는 변수 공간, list를 cdto에 넣어라 -->
 						<tr>
+<<<<<<< HEAD
 						  <td><a href="/admin/member_tableView?MID=${mdto.MID}" style="text-decoration: underline">${mdto.MID}</a></td> <!-- 수정/삭제 페이지로 이동 -->
+=======
+						  <td><a href="/admin/member_tableView?MID=${mdto.MID}" style="text-decoration: underline">${mdto.MID}</a></td> <!-- ?는 쿼리 문자열의 시작을 나타내는 기호  -->
+>>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 						  <td>${mdto.MNAME }</td>
 						  <td>${mdto.MPHONE }</td> 						  
 						  <td>${mdto.formattedJoinDay }</td>	

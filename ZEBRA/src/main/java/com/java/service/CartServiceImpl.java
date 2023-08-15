@@ -33,6 +33,7 @@ public class CartServiceImpl implements CartService {
 	
 	/* 카트 삭제 */
 	@Override
+<<<<<<< HEAD
 	public int deleteCart(int cartId) {
 		return cartMapper.deleteCart(cartId);
 	}
@@ -48,6 +49,24 @@ public class CartServiceImpl implements CartService {
 		cart.setCartCount(cartCount);
 		
 		cartMapper.modifyCount(cart);		
+=======
+	public void deleteCart(int cartId) {
+		cartMapper.deleteCart(cartId);
+	}
+	
+	/* 카트 수량 수정 */
+	@Override
+	public void modifyCart() {
+		int cartId = 3;
+		int cartCount = 5;
+		
+		CartDTO cart = new CartDTO();
+		cart.setCartId(cartId);
+		cart.setCartCount(cartCount);
+		
+		cartMapper.modifyCount(cart);
+		
+>>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 	}
 	
 	/* 카트 목록 */ 

@@ -18,6 +18,10 @@ public interface OrderMapper {
 	OrderDto selectOne(int ONO);
 
 	//주문 관리에 주문 판매 개수 증가하기
+<<<<<<< HEAD
 	public void updatePsoldcount(int ONO);
+=======
+	public void updatePsoldcount(int oNO);
+>>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 	
 }
