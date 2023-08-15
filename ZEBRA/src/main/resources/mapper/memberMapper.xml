@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.MemberMapper">
+
+<!-- 차트 회원 정보 -->
+<select id="selectMemberCount" resultType="int">
+    select count(*) as allCount from zebra where MCODE != 0
+</select>
+
+<select id="selectMaleCount" resultType="int">    
+    select count(*) as maleCount from zebra where MGENDER = '남성'
+</select>
+    
+<select id="selectFemaleCount" resultType="int">    
+    select count(*) as femaleCount from zebra where MGENDER = '여성'
+</select>
+
+<select id="sumTotalorder" resultType="int">    
+    SELECT SUM(MTOTAL_ORDER) AS totalOrder FROM zebra
+</select>
+
+<select id="sumTotalpay" resultType="int">    
+    SELECT SUM(MTOTAL_PAY) AS totalSum FROM zebra
+</select>
+
+<!-- 월별 매출 -->
+<select id="sumTotalpay3" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY3
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 3
+</select>
+
+<select id="sumTotalpay4" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY4
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 4
+</select>
+
+<select id="sumTotalpay5" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY5
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 5
+</select>
+
+<select id="sumTotalpay6" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY6
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 6
+</select>
+
+<select id="sumTotalpay7" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY7
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 7
+</select>
+
+<select id="sumTotalpay8" resultType="int">    
+	SELECT SUM(MTOTAL_PAY) AS TOTAL_PAY8
+	FROM SCOTT.ZEBRA
+	WHERE EXTRACT(MONTH FROM MJOINDAY) = 8
+</select>
+
+<!-- 최고 구매 고객 -->
+<select id="selectBest" resultType="com.java.dto.MemberDto">
+SELECT *
+FROM (
+    SELECT *
+    FROM SCOTT.ZEBRA
+    WHERE MCODE != 0
+    AND MTOTAL_PAY !=0
+    ORDER BY MTOTAL_PAY DESC
+) 
+WHERE ROWNUM BETWEEN 1 AND 5
+</select>
+
+
+<!-- 회원 정보 전체 가져오기 -->
+<select id="selectAll" resultType="com.java.dto.MemberDto">
+  SELECT * FROM zebra WHERE MCODE != 0
+   
+   <if test="category == 'all'"> <!-- member_table : 92  -->
+	  AND (MID like '%'||#{s_word}||'%' or MNAME like '%'||#{s_word}||'%')
+	</if>
+	<if test="category == 'MID'">
+	  AND MID like '%'||#{s_word}||'%'
+	</if>
+	<if test="category == 'MNAME'">
+	  AND MNAME like '%'||#{s_word}||'%'
+	</if>
+    <if test="#{s_word} != null">
+      AND (
+        MID LIKE '%' || #{s_word} || '%'
+        OR MNAME LIKE '%' || #{s_word} || '%'
+        OR MGENDER LIKE '%' || #{s_word} || '%'
+        OR MPHONE LIKE '%' || #{s_word} || '%'
+        OR MEMAIL LIKE '%' || #{s_word} || '%'
+        OR MJOINDAY LIKE '%' || #{s_word} || '%'
+        OR MTOTAL_PAY LIKE '%' || #{s_word} || '%'
+        OR MTOTAL_ORDER LIKE '%' || #{s_word} || '%'
+      )
+    </if>    
+  ORDER BY MCODE ASC
+</select>
+
+<!-- 회원 정보 1개 가져오기 -->
+<select id="selectOne" resultType="com.java.dto.MemberDto">
+   select * from zebra where MID=#{MID}
+</select>
+
+<!-- 회원 정보 1개 저장하기 -->
+<insert id="insertOne">
+   insert into zebra (MCODE, MID, MPASSWORD, MNAME, MGENDER, MBIRTH, MPHONE, MEMAIL, MZIP, MJOINDAY, MTOTAL_PAY, MTOTAL_ORDER, MAGREE)
+   values (zebra_seq.nextval, #{MID}, #{MPASSWORD}, #{MNAME}, #{MGENDER}, #{MBIRTH}, #{MPHONE}, #{MEMAIL}, #{MZIP}, SYSDATE, 0, 0, 0)
+</insert>
+
+<!-- 회원 정보 1개 수정 -->
+<update id="updateOne">
+   update ZEBRA set MNAME=#{MNAME},MPHONE=#{MPHONE},MEMAIL=#{MEMAIL} 
+   where MID=#{MID}
+</update>
+
+<!-- 회원 정보 1개 삭제 -->
+<delete id="deleteOne">
+   delete ZEBRA where MID=#{MID}
+</delete>
+
+<!-- 주문자 정보 -->
+<select id="getMemberInfo" resultType="com.java.dto.MemberDto">
+
+	SELECT MID, MNAME, MEMAIL, MADDR1, MADDR2, MTOTAL_PAY
+	FROM ZEBRA
+	WHERE MID = #{MID}
+
+</select>
+
+<!--관리자 로그인 확인-->
+<select id="selectLogin" resultType="com.java.dto.MemberDto" >
+	select * from zebra where MID=#{MID} and MPASSWORD=#{MPASSWORD}
+</select>
+
+	
+<!--  START SUN  -->
+
+
+<!-- 임시 비밀번호 -->
+<update id="changepwsend"  >	
+	 UPDATE ZEBRA SET MPASSWORD =#{pwcode} where  MEMAIL= #{MEMAIL}
+</update>
+
+<!--신규 회원 가입 및 등록  -->
+<insert id="insertMember" >
+	insert into zebra (MCODE,MID,MPASSWORD,MNAME,MGENDER,MBIRTH,MPHONE,MEMAIL,MAGREE,MJOINDAY,MZIP,MADDR1,MADDR2) values
+	(zebra_seq.nextval, #{MID}, #{MPASSWORD}, #{MNAME}, #{MGENDER}, #{MBIRTH}, #{MPHONE}, #{MEMAIL}, #{MAGREE},SYSDATE,#{MZIP},#{MADDR1},#{MADDR2})
+</insert>
+<!--회원 로그인 확인-->
+<select id="selectLoginMember" resultType="com.java.dto.MemberDto" >
+	select * from zebra where MID=#{MID} and MPASSWORD=#{MPASSWORD}
+</select>
+
+<!-- ID 중복 체크 -->
+<select id="selectId" resultType="com.java.dto.MemberDto" >
+	select * from zebra where MID=#{MID}
+</select>
+
+<!-- ID SEARCH - 이름 EMAIL 중복 체크 -->
+<select id="selectIdEmail" resultType="com.java.dto.MemberDto" >
+	select * from zebra where MNAME=#{MNAME} and MEMAIL=#{MEMAIL}
+</select>
+<!--  END SUN  -->
+
+
+
+</mapper>
+

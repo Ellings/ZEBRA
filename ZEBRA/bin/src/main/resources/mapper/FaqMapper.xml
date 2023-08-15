@@ -1,0 +1,88 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace= "com.java.mapper.FaqMapper">
+    
+    
+     <select id = "selectFaqAll" resultType="com.java.dto.FaqDto" >
+         select * from faq order by fno asc  		
+    </select>
+     
+     <!-- 게시글 1개 저장하기 -->
+     <select id = "insertfaq"  >
+         insert into faq values(FAQ_seq.nextval, 1, #{fcategory}, #{ftitle}, #{fcontent},#{mid}, sysdate, #{ffile})		
+    </select>
+     
+     
+     <!-- 게시글 리스트 전체 게시물 수 -->
+     <select id = "selectListAllCount" resultType="int" >
+         select count(*) from faq
+    </select>
+     
+     <!-- 게시글 리스트 전체 게시물 수 -->
+     <select id = "selectpageAll" resultType="com.java.dto.FaqDto" >        
+    <!--  select * from faq where  
+      
+     fno >= #{startRow} and fno <= #{endRow} order by fno asc  -->
+     
+      select * from (select rownum rnum, a.* from (select * from faq order by fno desc) a )
+	<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
+    </select>
+    
+    <!-- 현재 게시글 -->
+	 <select id = "selectOne" resultType="com.java.dto.FaqDto" >
+       	select * from faq where fno=#{fno}
+    </select>
+
+    <!-- //이전 게시글 -->
+	<select id = "selectPrevOne" resultType="com.java.dto.FaqDto" >
+      select * from faq where fno=
+	(select prevDto from(select fno,lag(fno,1,-1) over(order by fno asc) as prevDto	from faq order by fno asc) where fno=#{fno})
+    </select>
+
+    <!-- //다음 게시글 -->
+     <select id = "selectNextOne" resultType="com.java.dto.FaqDto" >
+      select * from faq where fno=
+	(select nextDto from
+	(select fno,lead (fno,1,-1) over(order by fno asc) as nextDto from faq order by fno asc) where fno=#{fno})
+      </select>
+      
+      
+      <delete id="deleteOne">
+      	delete from faq where fno=#{fno}
+      </delete>
+      
+      <!--게시글 1개 수정하기 update  -->
+      <update id="insertupdate">
+      	update faq set fcategory = #{fcategory}, ftitle=#{ftitle}, fcontent=#{fcontent},ffile=#{ffile} where fno=#{fno}
+      </update>
+      
+      
+      <!-- admin  admin  수정하기 -->
+      <insert id="insertComment">
+      	insert into commentfqa values(cfaq_seq.nextval,#{pno},#{mid},'1234',#{ccontent},sysdate)
+      </insert>
+      
+      <!--  admin 댓글 입력 확인하기 -->
+      <select id = "selectComment" resultType="com.java.dto.CommentDto">
+      	select * from commentfqa where pno = #{pno}
+      </select>
+      
+      
+      <!-- admin 댓글 삭제하기 -->
+       <delete id="deleteComment" >
+      	delete from  commentfqa where pno=#{pno}
+      </delete>
+      
+      <!-- admin 댓글 수정하기(update) -->
+       <update id="updateComment">
+      	update commentfqa set ccontent=#{ccontent}, cdate =sysdate where pno = ${pno}
+      </update>
+      
+      <!-- // admin의 문의 답변 수정 -->
+       <update id="updatefqa">
+      	update faq set fqa=#{fqa} where fno = ${fno}
+      </update>
+      
+</mapper>

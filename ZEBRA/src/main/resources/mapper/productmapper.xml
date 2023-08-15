@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.ProductMapper">
+<!-- 상품 관리에서 상품 전체 개수 검색하기 -->
+   <select id="selectListCount" resultType="int">
+      select count(*) from product
+      <if test="category == 'all'">      
+         where pname like '%'||#{s_word}||'%' or pdescript like '%'||#{s_word}||'%'
+      </if>
+      <if test="category == 'pname'">      
+         where pname like '%'||#{s_word}||'%' 
+      </if>
+      <if test="category == 'pdescript'">      
+         where pname like '%'||#{s_word}||'%' 
+      </if>
+   </select>
+   
+   
+<!-- 상품 관리 상품 전체 가져오기 -->
+<select id="selectAll" resultType="com.java.dto.ProductDto">
+   <!-- 공통 영역 -->
+            select * from (select rownum rnum, a.* from
+         (select * from product 
+            
+         <if test="category == 'all'">      
+            where pname like '%'||#{s_word}||'%' or pdescript like '%'||#{s_word}||'%'
+         </if>
+         <if test="category == 'pname'">      
+            where pname like '%'||#{s_word}||'%' 
+         </if>
+         <if test="category == 'pdescript'">      
+            where pdescript like '%'||#{s_word}||'%' 
+         </if>
+         
+      
+         <!-- 공통 영역  -->
+         <![CDATA[
+         order by pno asc) a)
+         where rnum>=#{startRow} and rnum<=#{endRow}
+        ]]>
+
+      
+   </select>
+
+
+
+   <!-- 상품 관리 상품 1개 가져오기 -->
+   <select id="selectOne" resultType="com.java.dto.ProductDto">
+      select * from product where pno=#{pno}
+   </select>
+   
+
+
+   <!-- 상품 관리 상품 이전글  -->
+   <select id="selectPreOne" resultType="com.java.dto.ProductDto">
+      select * from product where pno=
+     (select prevDto from
+     (select pno,lead(pno,1,-1) over(order by pno asc) as prevDto
+     from product order by pno asc) where pno=#{pno})
+   </select>
+   <!-- 상품 관리 상품 다음글  -->
+   <select id="selectNextOne" resultType="com.java.dto.ProductDto"> 
+      select * from product where pno=
+     (select nextDto from
+     (select pno,lag(pno,1,-1) over(order by pno asc) as nextDto
+     from product order by  pno asc) where pno=#{pno})
+   </select>
+   
+
+   <!-- 상품 관리 상품 1개 저장 -->
+   <!-- 상품 관리 상품 테이블에 새로운 레코드를 삽입하기. 상품 등록 시 사용되는 변수를 적으면 된다. product_seq.nextval는 시퀀스로 부터 새로운 게시글의 고유 번호를 생성한다.   -->
+   <insert id="insertOne">
+   	<selectKey resultType="int" keyProperty="pno" order="BEFORE">
+		select seq_product.nextval from dual
+	</selectKey>
+   insert into product (pno, pcode, pname, pprice, 
+      pstock, psoldcount, pcolor, psize, 
+      pdescript, pmainimg, pdetailimg1, pdetailimg2, pdetailimg3)
+   values (#{pno}, #{pcode}, #{pname}, #{pprice},
+      #{pstock}, #{psoldcount}, #{pcolor}, #{psize},
+      #{pdescript}, #{pmainimg}, #{pdetailimg1}, #{pdetailimg2}, #{pdetailimg3})
+</insert>
+   
+   
+   <!-- 상품 관리 상품 삭제 -->
+   <delete id="deleteOne">
+      delete product where pno=#{pno}
+   </delete>
+   
+   <!-- 상품 관리 상품 1개 수정  -->
+   <!-- 주어집 값에 대해 업데이트하기 그냥 상품 리스트에 적힌 변수를 적고 업데이트 대상을 pno가 주어진 값과 일치하는 레코드이다. -->
+   <update id="updateOne">
+      update product set pcode =#{pcode}, pname=#{pname}, pprice=#{pprice},
+      pstock=#{pstock},psoldcount=#{psoldcount},  pcolor=#{pcolor}, psize=#{psize},
+      pdescript=#{pdescript},
+      pmainimg=#{pmainimg},
+      pdetailimg1=#{pdetailimg1},pdetailimg2=#{pdetailimg2}, pdetailimg3=#{pdetailimg3}
+      where pno = #{pno}
+   </update>
+   <!--  
+   <update id="updatePstepCount">
+      update product set pstep=pstep+1 where pno=#{pno} and pstep=#{pstep}
+   </update>
+   -->
+
+   <!-- ============================여기부터는 상품 페이지 ====================================== -->
+
+
+
+	<!-- 유저 상품 페이지 여자 상품 개수 -->
+	 <select id="selectproduct_page_listCount" resultType="int">
+      select count(*) from product where pcode=10
+     	
+
+
+   </select>
+   
+    <!-- 유저 상품 페이지  홈 제품 개수 -->
+   	 <select id="selectproduct_page_listCounthome" resultType="int">
+      select count(*) from product where pcode=11
+
+   </select>
+   
+
+
+    <!-- 유저 상품 페이지 women 상품 페이지에서 상품 전체 가져오기 아무 옵션을 누르지 않을 경우--> 
+   <select id="selectPageAll" resultType="com.java.dto.ProductDto">
+      <!-- 공통 영역 -->
+        select * from (select rownum rnum, a.* from
+       (select * from product  
+            
+         
+         <!-- 공통 영역  -->
+         <![CDATA[
+         where pcode=10 order by pno asc) a) 
+          where rnum>=#{startRow} and rnum<=#{endRow} 
+        ]]> 
+
+    </select>
+    
+    <!-- 유저 상품 페이지 home에서 상품 전체 가져오기 아무 옵션을 누르지 않을 경우--> 
+	<select id="selectHomeAll" resultType="com.java.dto.ProductDto">
+   	<!-- 공통 영역 -->
+        select * from (select rownum rnum, a.* from
+         (select * from product 
+     
+         <!-- 공통 영역  -->
+         <![CDATA[
+         where pcode=11 order by pno asc) a) 
+          where rnum>=#{startRow} and rnum<=#{endRow} 
+        ]]> 
+
+    </select>
+  
+    
+    <!-- 유저 상품 페이지 상세 페이지에서 상품 1개 가져오기 -->
+    <!-- 상품 1개 가져오기 -->
+   <select id="selectPageOne" resultType="com.java.dto.ProductDto">
+      select * from product where pno=#{pno}
+   </select>
+   
+   
+    
+    <!-- 유저 상품 페이지 상품 페이지에서 ajax 검색하기 -->
+    <select id="selectSortAll" resultType="com.java.dto.ProductDto" >
+       
+		select * from product where pcode=10
+		
+         <if test="s_word">     
+            and upper(pname) like upper('%'||#{s_word}||'%')
+         
+         </if>
+		
+		<if test="pcolor == 'black'">     
+            and pcolor='black' 
+        </if>	
+		<if test="pcolor == 'pink'">      
+            and pcolor='pink' 
+         </if>
+         <if test="pcolor == 'orange'">      
+            and pcolor='orange'
+         
+         </if>
+		 <if test="pcolor == 'yellow'">     
+            and pcolor='yellow'
+         
+         </if>
+         <if test="pcolor == 'white'">     
+            and pcolor='white'
+         
+         </if>
+         
+		<if test="sorting == 'rowprice'">
+		 	order by pprice asc 
+		</if>
+		<if test="sorting == 'highprice'">
+			order by pprice desc 
+		</if>
+
+   
+    </select>
+   
+   
+   
+    
+   
+    
+    <!-- ===============================주문 관리 페이지============================================  -->
+      
+      <!-- 주문 전체에서 셀렉하기 개수 -->
+      <select id="selectorder_page_listCount" resultType="int">
+      select count(*) from zebraorder
+      <if test="ordercate == 'prepare'">      <!-- 상품 준비 중 -->
+         where OSTATUS='상품 준비 중'
+      </if>
+      <if test="ordercate == 'shipping'">      <!-- 배송 중 -->
+         where OSTATUS='배송 중'
+      </if>
+      <if test="ordercate == 'completed'">      <!-- 배송 완료 -->
+         where OSTATUS='배송 완료'
+      </if>
+      <if test="ordercate == 'ordercancel'">      <!-- 주문 취소 -->
+         where OSTATUS='주문 취소'
+      </if>
+      <if test="ordercate == 'confirmaion'">      <!-- 구매 확정-->
+         where OSTATUS='구매 확정'
+      </if>
+   	  </select>
+   
+   
+	 <!-- 상품 전체 가져오기 -->
+	 <select id="selectOrderAll" resultType="com.java.dto.OrderDto">
+  	 <!-- 공통 영역 -->
+            select * from (select rownum rnum, a.* from
+         (select * from zebraorder 
+            
+        <if test="ordercate == 'prepare'">      <!-- 상품 준비 중 -->
+         where OSTATUS='상품 준비 중'
+      </if>
+      <if test="ordercate == 'shipping'">      <!-- 배송 중 -->
+         where OSTATUS='배송 중'
+      </if>
+      <if test="ordercate == 'completed'">      <!-- 배송 완료 -->
+         where OSTATUS='배송 완료'
+      </if>
+      <if test="ordercate == 'ordercancel'">      <!-- 주문 취소 -->
+         where OSTATUS='주문 취소'
+      </if>
+      <if test="ordercate == 'confirmaion'">      <!-- 구매 확정-->
+         where OSTATUS='구매 확정'
+      </if>
+         
+      
+        <!-- 공통 영역  -->
+        <![CDATA[
+        order by ONO asc) a)
+        where rnum>=#{startRow} and rnum<=#{endRow}
+       ]]>
+
+      
+   	</select>
+    
+     <!-- 상품 1개 가져오기 -->
+   <select id="selectOrderOne" resultType="com.java.dto.OrderDto">
+      select * from zebraorder where ONO=#{ONO}
+   
+   </select>
+   
+   
+   
+   <!--  주문 관리에서 배송 상태 ajax  -->
+     <select id="selectUPAjaxAll" resultType="com.java.dto.OrderDto">
+      update zebraorder set OSTATUS=#{OSTATUS} where ONO=#{ONO}
+	  </select>
+   
+    <!-- ===============================주문 관리 페이지============================================  -->
+    
+    
+    <!-- ===============================메인 페이지 ================================================ -->
+    
+    <select id="selectphitAll" resultType="com.java.dto.ProductDto" >
+    	select * from product order by phit desc
+    </select>
+
+
+    <select id="selectBestAll" resultType="com.java.dto.ProductDto" >
+    	select * from product order by psoldcount desc
+    </select>
+    
+    
+    <!-- 상품 조회수 1 증가 -->
+   <update id="updatePhitUp">
+      update product set phit= phit+1 where pno=#{pno}
+   </update>
+
+    <!-- 상품 베스트 1 증가 -->
+   	<update id="updatePsoldCountUp">
+      update product set psoldcount= psoldcount+1 where ONO=#{ONO}
+     
+   	</update>
+    
+    
+    
+    
+    <!-- ===============================메인 페이지 ================================================ -->
+    
+    
+    
+    
+    
+</mapper>
+
