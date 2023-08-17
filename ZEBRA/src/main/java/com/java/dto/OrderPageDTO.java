@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class OrderPageDTO {
 
 	private ArrayList<OrderPageItemDTO> orders;
-
 	
 	public ArrayList<OrderPageItemDTO> getOrders() {
 		return orders;

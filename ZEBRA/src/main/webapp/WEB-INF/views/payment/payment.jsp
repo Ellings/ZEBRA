@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="/css/content.css?v=Y" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/top_navi.js"></script>
 <script type="text/javascript" src="/js/left_navi.js"></script>
@@ -30,13 +31,6 @@
 <link rel="stylesheet" href="/vendors/nice-select/nice-select.css">
 <link rel="stylesheet" href="/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/css/style.css">
-<script>
-    function writeBtn(){
-    	if(confirm("주문 및 결제를 하시겠습니까?")){
-    		write.submit();
-    	}
-    }    
-</script>
 
 <script>
 (function($) {	
@@ -71,10 +65,37 @@
 			// 총 갯수
 			$(".totalCount_span").text(totalCount);
 			// 최종 가격
-			$("#finalTotalPrice_span").val(finalTotalPrice.toLocaleString());
+			$(".finalTotalPrice_span").val(finalTotalPrice.toLocaleString());
 			
 		});
 	}) (jQuery);
+</script>
+
+<script>
+function buyBtn(){ /* Line 384 */
+	IMP.init('imp25827466'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+	  IMP.request_pay({
+	    pg: "html5_inicis", // 실제 계약 후에는 실제 상점아이디로 변경
+	    pay_method: "card",
+	    merchant_uid: "merchant_"+new Date().getTime(),
+	    name : '최초인증결제',
+	    amount : 100, // 결제창에 표시될 금액. 실제 승인이 이루어지지는 않습니다. (모바일에서는 가격이 표시되지 않음)
+	    customer_uid : 'your-customer-unique-id', // 필수 입력.
+		buyer_email : 'iamport@siot.do',
+		buyer_name : '아임포트',
+		buyer_tel : '02-1234-1234',
+	  }, function (rsp) { // callback
+	      if (rsp.success) {
+	    	  var msg = '결제가 완료되었습니다.';
+	          alert(msg);
+	    	  write.submit();	        
+	      } else {
+	    	  var msg = '결제에 실패하였습니다.';
+	          msg += ' 에러 내용 : ' + rsp.error_msg;
+	          alert(msg);
+	      }
+	  });
+	}
 </script>
 
 </head>
@@ -163,8 +184,8 @@
 					</div>
 					<div class="poroductTotal">
 						<ul>	
-							<li>총 합계 
-								<input type="text" id="finalTotalPrice_span" 
+							<li>총 합계 <!-- Line 298 -->
+								<input type="text" class="finalTotalPrice_span" 
 								style="border: none; text-align: right; margin-right:10px; background: transparent;
 								font-size: 20px; font-weight: bold; vertical-align: middle;" readonly> 원
 							</li>
@@ -295,7 +316,10 @@
 									<th scope="row"><span>총 결제금액</span></th>
 									<td>
 										<ul class="pta">
-											<li><span class="valign"><strong>1,133,810 원</strong></li>
+											<li>
+											<input type="text" class="finalTotalPrice_span" style="outline: none; border: none; width: 50px; 
+											vertical-align: middle; font-size: 13px; font-weight: bold;" readonly><strong>원</strong>
+											</li>
 										</ul>
 									</td>
 								</tr>
@@ -356,7 +380,7 @@
 						<div class="orderCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig iw0140" onclick="javascript:location.href='payment'">뒤로가기</a></li>
-								<li><a href="#" class="sbtnMini iw0140" onclick="writeBtn()">주문 / 결제</a></li>								
+								<li><a href="#" class="sbtnMini iw0140" onclick="buyBtn()">주문 / 결제</a></li>								
 							</ul>
 						</div>
 					</div>

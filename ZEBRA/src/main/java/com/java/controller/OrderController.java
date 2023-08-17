@@ -31,6 +31,8 @@ public class OrderController {
 	@Autowired
 	CartService cartService;
 	
+	
+	
 	@GetMapping("/payment/payment/{MID}")
 	public String payment(@PathVariable("MID") String MID, Model model) {
 		ArrayList<CartDTO> cartInfo = cartService.getCartList(MID);

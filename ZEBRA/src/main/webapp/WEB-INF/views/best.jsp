@@ -8,15 +8,9 @@
 		
 		<!-- 위에 제목  -->
 		<div class="section-intro pb-60px">
-<<<<<<< HEAD
 			<p>Best Product는 상품 판매 수를 반영한 순위입니다</p>
 			<h2>
 				Best <span class="section-intro__style">Product</span>
-=======
-			<p>Popular Item in the market</p>
-			<h2>
-				Best <span class="section-intro__style">Sellers</span>
->>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 			</h2>
 		</div>
 		<!-- 위에 제목  -->

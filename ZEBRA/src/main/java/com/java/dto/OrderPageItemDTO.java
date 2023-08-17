@@ -10,22 +10,26 @@ import lombok.NoArgsConstructor;
 public class OrderPageItemDTO {
 
 	/* 뷰로부터 전달받을 값 */
-    private int MID;
-    private int cartCount; 
-    private String oaddr1;
-    private String oaddr2;
+    private int pno;    
+    private int pstock;
     
 	/* DB로부터 꺼내올 값 */
-    private int pno;
+    private String pname;    
     private int pprice;    
     
 	/* 만들어 낼 값 */
-    private int totalPrice;
+    private int salePrice;    
+    private int totalPrice; 
+    
+    public void initSaleTotal() {
+		this.salePrice = (int) (this.pprice);
+		this.totalPrice = this.salePrice*this.pstock;
+	}
     
     @Override
 	public String toString() {
-		return "OrderPageItemDTO [MID=" + MID + ", cartCount=" + cartCount + ", pno=" + pno
-				+ ", pprice=" + pprice + ", totalPrice=" + totalPrice + "]";
-	}
-	
+		return "OrderPageItemDTO [pno=" + pno + ", pstock=" + pstock + ", pname=" + pname
+				+ ", pprice=" + pprice + ",  salePrice=" + salePrice + ", totalPrice=" + totalPrice + "]";
+		
+	}	
 }
