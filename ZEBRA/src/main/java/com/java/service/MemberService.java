@@ -36,22 +36,22 @@ public interface MemberService {
 	/* 주문자 정보 */
 	public MemberDto getMemberInfo(String MID);
 	
+	// CSV 정보 가져오기
+	ArrayList<MemberDto> selectAll();	
 	
 	
-	// START SUN //
-		// 회원 로그인
-		String selectLoginMember(String MID, String MPASSWORD);
-		
-		//id 중복 검사 
-		MemberDto selectId(String MID);
-		
-		//id search- idEmaiCheck
-		MemberDto selectIdEmail(String MNAME,String MEMAIL);
-		
-	    //신규 회원 가입
-		String insertMember(MemberDto member);
-		
+	// 회원 로그인
+	String selectLoginMember(String MID, String MPASSWORD);
+	
+	//id 중복 검사 
+	MemberDto selectId(String MID);
+	
+	//id search- idEmaiCheck
+	MemberDto selectIdEmail(String MNAME,String MEMAIL);
+	
+    //신규 회원 가입
+	String insertMember(MemberDto member);
 
-		// START SUN //
+
 		
 }

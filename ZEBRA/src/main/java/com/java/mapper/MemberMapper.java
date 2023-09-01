@@ -60,12 +60,13 @@ public interface MemberMapper {
 	// 회원 정보 1개 삭제하기
 	void deleteOne(String MID);
 	
+	// CSV 정보 가져오기
+	ArrayList<MemberDto> selectAll();
+	
 	/* 주문자 주소 정보 */
 	public MemberDto getMemberInfo(String MID);	
 	
 
-
-	// start sun //
 	
 	//회원 로그인
 	MemberDto selectLoginMember(String MID, String MPASSWORD);
@@ -84,13 +85,4 @@ public interface MemberMapper {
 	void changepwsend(String MEMAIL, String pwcode);
 
 
-
-	
-
-
-
-	
-
-	
-	// end sun //	
 }

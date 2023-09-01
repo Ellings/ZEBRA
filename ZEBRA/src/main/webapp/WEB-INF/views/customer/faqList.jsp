@@ -102,7 +102,7 @@
 							<c:forEach var="FAQ" items="${list }"> <!-- 컨트롤러의 list -->
 							<li>
 								<a href="javascript:;" class="faqbtn">
-									<div class="question">
+									<div class="question" style="padding:0; line-height: 0.7;" >
 										<div class="blet1">${FAQ.fno }</div>
 										<c:if test="${FAQ.fqa ==1 }">										
 											<div class="blet">문의</div>										
@@ -111,17 +111,16 @@
 											<div class="blet">답변</div>										
 										</c:if>
 										
-										<div class="category">${FAQ.fcategory  }</div>
-										
+										<div class="category">${FAQ.fcategory }</div>									
 										
 										<div class="title">
-										<a href="notice_view?fno=${FAQ.fno }&page=${page}"> ${FAQ.ftitle }</a></div>
+											<a href="notice_view?fno=${FAQ.fno }&page=${page}"> ${FAQ.ftitle }</a>
+										</div>
 										<div class="category1">${FAQ.mid }</div>
 										<div class="category2">
 										<fmt:formatDate pattern = "yyyy-MM-dd" value="${FAQ.fdate }"/>
 										
-										</div>       								
-        
+										</div>      
 									</div>
 								</a>
   

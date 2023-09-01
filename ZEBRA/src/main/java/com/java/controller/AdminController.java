@@ -1,9 +1,12 @@
 package com.java.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,36 +104,32 @@ public class AdminController {
       return "redirect:/layout/index";
    }
    
-   
-
-   
-   
    // ajax로 종류별 회원 정보 가져오기
-      @PostMapping("/admin/indexAjax")
-      @ResponseBody // 데이터로 넘겨줌 -> return으로
-      public int[][] indexAjax(Model model) { // data를 받음   
-         int[] list = memberService.selectMemberAll();
-         int allProductCount = boardService.selectProductCount();
-         
-         int[][] memberNproduct = new int[2][];
-         memberNproduct[0] = list;
-         memberNproduct[1] = new int[] { allProductCount };
-         System.out.println("list :"+list);
-         return memberNproduct; // function(data)로 넘김
-      }
+   @PostMapping("/admin/indexAjax")
+   @ResponseBody // 데이터로 넘겨줌 -> return으로
+   public int[][] indexAjax(Model model) { // data를 받음   
+     int[] list = memberService.selectMemberAll();
+     int allProductCount = boardService.selectProductCount();
+     
+     int[][] memberNproduct = new int[2][];
+     memberNproduct[0] = list;
+     memberNproduct[1] = new int[] { allProductCount };
+     System.out.println("list :"+list);
+     return memberNproduct; // function(data)로 넘김
+   }
    
    
    // 회원 테이블 전체 가져오기
-      @RequestMapping("/admin/member_table")
-      public String member_table(@RequestParam(defaultValue = "") String s_word, String category, Model model) {
-         System.out.println("AdminController member_table category : "+category);
-         HashMap<String,Object> map = memberService.selectAll(s_word, category);
-         model.addAttribute("list",map.get("list"));
-         model.addAttribute("listCount",map.get("listCount"));
-         model.addAttribute("s_word",map.get("s_word"));
-         model.addAttribute("category",map.get("category"));
-         return "admin/member_table";
-      }      
+   @RequestMapping("/admin/member_table")
+   public String member_table(@RequestParam(defaultValue = "") String s_word, String category, Model model) {
+     System.out.println("AdminController member_table category : "+category);
+     HashMap<String,Object> map = memberService.selectAll(s_word, category);
+     model.addAttribute("list",map.get("list"));
+     model.addAttribute("listCount",map.get("listCount"));
+     model.addAttribute("s_word",map.get("s_word"));
+     model.addAttribute("category",map.get("category"));
+     return "admin/member_table";
+   }      
       
    // 회원 정보 1개 가져오기
    @RequestMapping("/admin/member_tableView")
@@ -168,6 +167,35 @@ public class AdminController {
    public String boardDelete(String MID) {
       memberService.deleteOne(MID);
       return "redirect:/admin/member_table";
+   }
+   
+   // CSV 다운로드
+   @GetMapping("/admin/csv/download")
+   public void downloadCSV(HttpServletResponse response) throws IOException {
+       response.setContentType("text/csv");
+       response.setHeader("Content-Disposition", "attachment; filename=\"data.csv\"");
+       
+       ArrayList<MemberDto> list = memberService.selectAll();
+
+       // 문자 인코딩 설정
+       response.setCharacterEncoding("MS949");
+       
+       StringBuilder csvContent = new StringBuilder();
+       csvContent.append("MID,MNAME,MGENDER,MPHONE,MEMAIL,MJOINDAY,MTOTAL_PAY,MTOTAL_ORDER\n");
+
+       for (MemberDto mdto : list) {
+           csvContent.append("\"").append(mdto.getMID()).append("\",");
+           csvContent.append("\"").append(mdto.getMNAME()).append("\",");
+           csvContent.append("\"").append(mdto.getMGENDER()).append("\",");
+           csvContent.append("\"").append(mdto.getMPHONE()).append("\",");
+           csvContent.append("\"").append(mdto.getMEMAIL()).append("\",");
+           csvContent.append("\"").append(mdto.getFormattedJoinDay()).append("\",");
+           csvContent.append("\"").append(mdto.getMTOTAL_PAY()).append("\",");
+           csvContent.append("\"").append(mdto.getMTOTAL_ORDER()).append("\"\n");
+           
+       }
+
+       response.getWriter().write(csvContent.toString());
    }
    
    

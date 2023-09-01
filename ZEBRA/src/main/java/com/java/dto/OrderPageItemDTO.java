@@ -31,5 +31,5 @@ public class OrderPageItemDTO {
 		return "OrderPageItemDTO [pno=" + pno + ", pstock=" + pstock + ", pname=" + pname
 				+ ", pprice=" + pprice + ",  salePrice=" + salePrice + ", totalPrice=" + totalPrice + "]";
 		
-	}	
+	}
 }

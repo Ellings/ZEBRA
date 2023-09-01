@@ -9,19 +9,11 @@ public interface CartService {
 	/* 장바구니 추가 */
 	public int addCart(CartDTO cart);
 	
-<<<<<<< HEAD
 	/* 카트 수량 수정 */	
 	public int modifyCount(CartDTO cart);
 	
 	/* 카트 삭제 */
 	public int deleteCart(int cartId);
-=======
-	/* 카트 삭제 */
-	void deleteCart(int cartId);
-
-	/* 카트 수량 수정 */
-	public int modifyCount(CartDTO cart);
->>>>>>> branch 'master' of https://github.com/Ellings/ZEBRA.git
 
 	/* 장바구니 정보 리스트 */
 	public ArrayList<CartDTO> getCartList(String MID);

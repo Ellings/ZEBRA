@@ -7,11 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import com.java.dto.BoardDto;
 import com.java.dto.MemberDto;
-import com.java.dto.ProductDto;
 import com.java.mapper.MemberMapper;
 
 @Service
@@ -103,13 +100,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public ArrayList<MemberDto> selectAll() {
+		// CSV 정보 가져오기
+		ArrayList<MemberDto> list = memberMapper.selectAll();
+		return list;
+	}
+	
+	@Override
 	// 주문자 정보
 	public MemberDto getMemberInfo(String MID) {
 		return memberMapper.getMemberInfo(MID);
 	}
 	
-
-	// START SUN //
+	
+	
 	@Override // 회원 로그인
 	public String selectLoginMember(String MID, String MPASSWORD) {
 		String resultCode = "";
@@ -153,11 +157,5 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	
-	
-
-
-
-	// END SUN //
 
 }
