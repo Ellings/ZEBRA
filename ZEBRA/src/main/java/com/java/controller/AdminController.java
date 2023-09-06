@@ -1,12 +1,18 @@
 package com.java.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,6 +146,15 @@ public class AdminController {
       return "admin/member_tableView";
    }
    
+   // 회원 정보 1개 수정하기
+   @PostMapping("/admin/member_tableView") 
+   public String memberUpdate(MemberDto mdto, String MID, Model model) throws Exception { 
+      memberService.updateOne(mdto);      
+      System.out.println("MID :"+mdto.getMID());
+      System.out.println("MNAME :"+mdto.getMNAME());      
+      return "redirect:/admin/member_table";
+   }   
+   
    @GetMapping("/admin/member_Write")
    public String member_Write() {
       return "admin/member_Write";
@@ -152,15 +167,6 @@ public class AdminController {
       System.out.println("MCODE :"+mdto.getMCODE());
       return "redirect:member_table";
    }
-
-   // 회원 정보 1개 수정하기
-   @PostMapping("/admin/member_tableView") 
-   public String memberUpdate(MemberDto mdto, String MID, Model model) throws Exception { 
-      memberService.updateOne(mdto);      
-      System.out.println("MID :"+mdto.getMID());
-      System.out.println("MNAME :"+mdto.getMNAME());      
-      return "redirect:/admin/member_table";
-   }   
    
    // 회원 정보 1개 삭제하기     
    @RequestMapping("/admin/memberDelete")
@@ -180,8 +186,9 @@ public class AdminController {
        // 문자 인코딩 설정
        response.setCharacterEncoding("MS949");
        
+       // 헤더 행 추가
        StringBuilder csvContent = new StringBuilder();
-       csvContent.append("MID,MNAME,MGENDER,MPHONE,MEMAIL,MJOINDAY,MTOTAL_PAY,MTOTAL_ORDER\n");
+       csvContent.append("MID, MNAME, MGENDER, MPHONE, MEMAIL, MJOINDAY, MTOTAL_PAY, MTOTAL_ORDER\n");
 
        for (MemberDto mdto : list) {
            csvContent.append("\"").append(mdto.getMID()).append("\",");
@@ -196,6 +203,46 @@ public class AdminController {
        }
 
        response.getWriter().write(csvContent.toString());
+   }
+   
+   // XLSX 다운로드
+   @GetMapping("/admin/xlsx/download")
+   public void downloadXLSX(HttpServletResponse response) throws IOException {
+       response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+       response.setHeader("Content-Disposition", "attachment; filename=\"data.xlsx\"");
+       
+       ArrayList<MemberDto> list = memberService.selectAll();
+       
+       // XLSX 워크북 생성
+       Workbook workbook = new XSSFWorkbook();
+       Sheet sheet = workbook.createSheet("Members");
+       
+       // 헤더 행 추가
+       Row headerRow = sheet.createRow(0);
+       String[] headers = {"MID", "MNAME", "MGENDER", "MPHONE", "MEMAIL", "MJOINDAY", "MTOTAL_PAY", "MTOTAL_ORDER"};
+       for (int i = 0; i < headers.length; i++) {
+           Cell cell = headerRow.createCell(i);
+           cell.setCellValue(headers[i]);
+       }
+       
+       // 데이터 행 추가
+       int rowNum = 1;
+       for (MemberDto mdto : list) {
+           Row row = sheet.createRow(rowNum++);
+           row.createCell(0).setCellValue(mdto.getMID());
+           row.createCell(1).setCellValue(mdto.getMNAME());
+           row.createCell(2).setCellValue(mdto.getMGENDER());
+           row.createCell(3).setCellValue(mdto.getMPHONE());
+           row.createCell(4).setCellValue(mdto.getMEMAIL());
+           row.createCell(5).setCellValue(mdto.getFormattedJoinDay());
+           row.createCell(6).setCellValue(mdto.getMTOTAL_PAY());
+           row.createCell(7).setCellValue(mdto.getMTOTAL_ORDER());
+       }
+       
+       // 파일 출력
+       try (OutputStream outputStream = response.getOutputStream()) {
+           workbook.write(outputStream);
+       }
    }
    
    
@@ -350,6 +397,12 @@ public class AdminController {
    public String xx() {
       
       return "admin/xx";
+   }
+   
+   // 스케쥴러
+   @RequestMapping("/admin/scheduler")
+   public String scheduler() {   
+      return "admin/scheduler";
    }
    
    

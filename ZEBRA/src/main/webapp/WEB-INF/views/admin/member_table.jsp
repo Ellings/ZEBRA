@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -118,6 +117,8 @@
                     <a href="/admin/member_Write"><input type="button" value="등록" class="write" style="font-size: 13px; margin-top: 2px; margin-left: 15px;"></a>
                     <!-- CSV 다운로드 -->                    
                     <a href="csv/download"><input type="button" value="CSV" class="write" style="font-size: 13px; margin-top: 2px; margin-left: 6px;"></a>
+                    <!-- XLSX 다운로드 -->                    
+                    <a href="xlsx/download"><input type="button" value="XLSX" class="write" style="font-size: 13px; margin-top: 2px; margin-left: 6px;"></a>
                     
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

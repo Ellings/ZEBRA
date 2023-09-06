@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -69,24 +68,49 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
    
   <script>
-    /* 수정 기능  */
-    function updateMtn(){
-    	if(confirm("게시글을 수정하시겠습니까?")){
-    		update.submit();    	
-    	}
-    }
-    
-    /* 삭제 기능  */
-    function deleteMtn(){
-  	  if(confirm("게시글을 삭제하시겠습니까?")){
-  		  location.href="memberDelete?MID=${mdto.MID}";
-  	  }
-    }    
-    
+  /* 수정 기능  */
+  function updateMtn(){
+  	
+  // 전화번호 정규 표현식 패턴
+  var phonePattern = /^\d{3}-\d{3,4}-\d{4}$/;
+     
+  // 전화번호 입력값 가져오기
+  var phoneInput = document.getElementById("phone").value;
+     
+  // 정규 표현식과 비교
+  if (!phonePattern.test(phoneInput)) {
+      alert("핸드폰 형식이 잘못되었습니다. (예 : 010-1234-5678)");
+      return; // 폼 제출을 중단
+  }    
+  	
+  // 이메일 정규 표현식 패턴
+  var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+     
+  // 이메일 입력값 가져오기
+  var emailInput = document.getElementById("email").value;
+     
+  // 정규 표현식과 비교
+  if (!emailPattern.test(emailInput)) {
+      alert("이메일 형식이 잘못되었습니다. (예 : abc@abc.com)");
+      return; // 폼 제출을 중단
+  }    
+  
+  	if(confirm("게시글을 수정하시겠습니까?")){
+  		update.submit();    	
+  	}
+  	
+  }
+  
+  /* 삭제 기능 */
+  function deleteMtn(){
+	  if(confirm("게시글을 삭제하시겠습니까?")){
+		  location.href="memberDelete?MID=${mdto.MID}";
+	  }
+  }      
   </script>
 	
   </head>
-
+  
   <body class="nav-md">
     <div class="container body ">
       <div class="main_container ">
@@ -131,23 +155,26 @@
 					<table class="memberTable">
 					<tr>
 		                <td class="text">아이디</td>
-		                <td class="textbox">${mdto.MID}</td>
-					    <input type="hidden" id="id" name="MID" value="${mdto.MID}" >
+		                <td class="textbox">${mdto.MID}
+					    <input type="hidden" id="id" name="MID" value="${mdto.MID}"></td>
 		            </tr>		            
 		            
 		            <tr>
 		                <td class="text">이름</td>
-		                <td class="textbox"><input type="text" id="name" name="MNAME" value="${mdto.MNAME}"></td>
+		                <td class="textbox">
+		                <input type="text" id="name" name="MNAME" value="${mdto.MNAME}"></td>
 		            </tr>
 		            
 		            <tr>
 		                <td class="text">핸드폰</td>
-		                <td class="textbox"><input type="text" id="phone" name="MPHONE" value="${mdto.MPHONE}"></td>
+		                <td class="textbox">
+		                <input type="text" id="phone" name="MPHONE" value="${mdto.MPHONE}"></td>
 		            </tr>		           
-		            
+		            		            
 		            <tr>
 		                <td class="text">이메일</td>
-		                <td class="textbox"><input type="text" id="email" name="MEMAIL" value="${mdto.MEMAIL}"></td>
+		                <td class="textbox">
+		                <input type="text" id="email" name="MEMAIL" value="${mdto.MEMAIL}"></td>
 		            </tr>
 		            </table>
 		            
