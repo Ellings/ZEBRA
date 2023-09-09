@@ -19,7 +19,7 @@
 1. 선택한 컬러, 가격 정렬 및 검색값 ajax 호출
 ![main1](https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee)
 
-### 업데이트 중입니다
+### Updating...
 
 <!--
 mapbook
