@@ -10,7 +10,7 @@
 2. JavaMail API를 활용한 스케쥴링 메일 발송
 
 ### Explore the Project
-서비스 및 기능 피드백 적극적으로 수용하고 있습니다
+서비스 및 기능 피드백 적극적으로 수용하고 있습니다!
 
 ![main](https://github.com/Ellings/ZEBRA/assets/108660734/69d6a385-7d5a-451f-a81a-eda83ccd641b)
 
