@@ -45,6 +45,9 @@
 9. [관리자]주문 관리 - 배송 상태 수정 및 검색 기능<br>
 <p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/fcb8a6b9-afa6-4bc5-b3a6-bca4a54aaf93" width="700"></p><br>
 
+10. [관리자]JavaMail API를 활용한 지정 시간 메일 발송 스케쥴링
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/68447755-ad05-4a48-96cf-f5e7c5b695cb" width="700"></p><br>
+
 📚 STACKS<br>
 ![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
