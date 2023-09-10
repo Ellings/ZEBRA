@@ -12,38 +12,38 @@
 ### Explore the Project
 서비스 및 기능 피드백 적극적으로 수용하고 있습니다!
 
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/69d6a385-7d5a-451f-a81a-eda83ccd641b" width="600">
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/69d6a385-7d5a-451f-a81a-eda83ccd641b" width="700"></p>
 
 
 ## 기능 소개
 <blockquote>이미지를 클릭하면 큰 화면으로 볼 수 있습니다.</blockquote>
 
 1. [유저]선택한 컬러, 가격 정렬 및 검색값 ajax 호출<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee" width="700"></p><br>
 
 2. [유저]장바구니 CRUD 및 체크박스 기능<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/72e3cc1f-07d9-4384-8df7-571c25f9dbb2" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/72e3cc1f-07d9-4384-8df7-571c25f9dbb2" width="700"></p><br>
 
 3. [유저]가입 회원만 이용 가능한 댓글 CRUD 기능<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/e706d1a4-50c1-4790-a05b-312ae24cc302" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/e706d1a4-50c1-4790-a05b-312ae24cc302" width="700"></p><br>
 
 4. [유저]회원가입 및 우편 API<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/dee442b5-bbc6-46ed-ba3b-013341463818" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/dee442b5-bbc6-46ed-ba3b-013341463818" width="700"></p><br>
 
 5. [유저]주문 및 결제 API<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/274bf36c-ce4a-47a3-9558-58069102dc66" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/274bf36c-ce4a-47a3-9558-58069102dc66" width="700"></p><br>
   
 6. [관리자]회원 관리 데이터 ajax 호출<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598" width="700"></p><br>
 
 7. [관리자]회원 목록 CRUD 및 CSV, XLSX 파일 다운로드 기능<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/22815df2-ac2c-4deb-b033-5c97fda23525" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/22815df2-ac2c-4deb-b033-5c97fda23525" width="700"></p><br>
 
 8. [관리자]상품 관리 CRUD<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/26b1b076-1a93-43cf-8a5b-5db37d965d49" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/26b1b076-1a93-43cf-8a5b-5db37d965d49" width="700"></p><br>
 
 9. [관리자]주문 관리 - 배송 상태 수정 및 검색 기능<br>
-<img src="https://github.com/Ellings/ZEBRA/assets/108660734/fcb8a6b9-afa6-4bc5-b3a6-bca4a54aaf93" width="600"><br>
+<p align="center"><img src="https://github.com/Ellings/ZEBRA/assets/108660734/fcb8a6b9-afa6-4bc5-b3a6-bca4a54aaf93" width="700"></p><br>
 
 📚 STACKS<br>
 ![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
