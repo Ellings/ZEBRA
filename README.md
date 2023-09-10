@@ -12,27 +12,29 @@
 ### Explore the Project
 서비스 및 기능 피드백 적극적으로 수용하고 있습니다!
 
-![main](https://github.com/Ellings/ZEBRA/assets/108660734/69d6a385-7d5a-451f-a81a-eda83ccd641b)
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/69d6a385-7d5a-451f-a81a-eda83ccd641b" width="600">
 
 
 ## 기능 소개
-1. [유저]선택한 컬러, 가격 정렬 및 검색값 ajax 호출 
-![main1](https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee)
+<blockquote>이미지를 클릭하면 큰 화면으로 볼 수 있습니다.</blockquote>
 
-2. [유저]장바구니 CRUD 및 체크박스 기능
-![main2](https://github.com/Ellings/ZEBRA/assets/108660734/72e3cc1f-07d9-4384-8df7-571c25f9dbb2)
+1. [유저]선택한 컬러, 가격 정렬 및 검색값 ajax 호출<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee" width="600"><br>
 
-3. [유저]가입 회원만 이용 가능한 댓글 CRUD 기능
-![main3](https://github.com/Ellings/ZEBRA/assets/108660734/e706d1a4-50c1-4790-a05b-312ae24cc302)
+2. [유저]장바구니 CRUD 및 체크박스 기능<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/72e3cc1f-07d9-4384-8df7-571c25f9dbb2" width="600"><br>
 
-4. [유저]회원가입 및 우편 API
-![main4](https://github.com/Ellings/ZEBRA/assets/108660734/dee442b5-bbc6-46ed-ba3b-013341463818)
+3. [유저]가입 회원만 이용 가능한 댓글 CRUD 기능<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/e706d1a4-50c1-4790-a05b-312ae24cc302" width="600"><br>
 
-5. [유저]주문 및 결제 API
-![main5](https://github.com/Ellings/ZEBRA/assets/108660734/274bf36c-ce4a-47a3-9558-58069102dc66)
+4. [유저]회원가입 및 우편 API<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/dee442b5-bbc6-46ed-ba3b-013341463818" width="600"><br>
+
+5. [유저]주문 및 결제 API<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/274bf36c-ce4a-47a3-9558-58069102dc66" width="600"><br>
   
-6. [관리자]회원 관리 데이터 ajax 호출
-![main6](https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598)
+6. [관리자]회원 관리 데이터 ajax 호출<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598" width="600"><br>
 
 ## Updating...
 
