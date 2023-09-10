@@ -16,31 +16,27 @@
 
 
 ## 기능 소개
-1. 선택한 컬러, 가격 정렬 및 검색값 ajax 호출
- 
+1. [유저]선택한 컬러, 가격 정렬 및 검색값 ajax 호출 
 ![main1](https://github.com/Ellings/ZEBRA/assets/108660734/819a812e-cf15-42b7-9639-29b18d884bee)
 
-### Updating...
+2. [유저]장바구니 CRUD 및 체크박스 기능
+![main2](https://github.com/Ellings/ZEBRA/assets/108660734/72e3cc1f-07d9-4384-8df7-571c25f9dbb2)
+
+3. [유저]가입 회원만 이용 가능한 댓글 CRUD 기능
+![main3](https://github.com/Ellings/ZEBRA/assets/108660734/e706d1a4-50c1-4790-a05b-312ae24cc302)
+
+4. [유저]회원가입 및 우편 API
+![main4](https://github.com/Ellings/ZEBRA/assets/108660734/dee442b5-bbc6-46ed-ba3b-013341463818)
+
+5. [유저]주문 및 결제 API
+![main5](https://github.com/Ellings/ZEBRA/assets/108660734/274bf36c-ce4a-47a3-9558-58069102dc66)
+  
+6. [관리자]회원 관리 데이터 ajax 호출
+![main6](https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598)
+
+## Updating...
 
 <!--
-mapbook
-
-검색어 자동 완성
-
-mapbook
-
-한영 오타 자동 전환 검색 기능
-
-mapbook
-
-한글 영어 상호 보완 검색 기능
-
-mapbook
-
-클릭 한번에 내 주변 대출 가능 도서관 찾기
-
-mapbook
-
 📚 STACKS
     
 
