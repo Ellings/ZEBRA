@@ -42,10 +42,16 @@
 8. [관리자]상품 관리 CRUD<br>
 <img src="https://github.com/Ellings/ZEBRA/assets/108660734/26b1b076-1a93-43cf-8a5b-5db37d965d49" width="600"><br>
 
-## Updating...
+9. [관리자]주문 관리 - 배송 상태 수정 및 검색 기능<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/fcb8a6b9-afa6-4bc5-b3a6-bca4a54aaf93" width="600"><br>
 
+📚 STACKS<br>
+https://github.com/Ellings/
+
+## Updating...
+    
 <!--
-📚 STACKS
+
     
 
 📁 Foldering
