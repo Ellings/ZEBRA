@@ -46,7 +46,7 @@
 <img src="https://github.com/Ellings/ZEBRA/assets/108660734/fcb8a6b9-afa6-4bc5-b3a6-bca4a54aaf93" width="600"><br>
 
 📚 STACKS<br>
-https://github.com/Ellings/
+<a href="https://github.com/Ellings/" target="_blank">GitHub 페이지</a>
 
 ## Updating...
     
