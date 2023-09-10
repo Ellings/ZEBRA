@@ -39,6 +39,8 @@
 7. [관리자]회원 목록 CRUD 및 CSV, XLSX 파일 다운로드 기능<br>
 <img src="https://github.com/Ellings/ZEBRA/assets/108660734/22815df2-ac2c-4deb-b033-5c97fda23525" width="600"><br>
 
+8. [관리자]상품 관리 CRUD<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/26b1b076-1a93-43cf-8a5b-5db37d965d49" width="600"><br>
 
 ## Updating...
 
