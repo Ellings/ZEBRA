@@ -36,6 +36,10 @@
 6. [관리자]회원 관리 데이터 ajax 호출<br>
 <img src="https://github.com/Ellings/ZEBRA/assets/108660734/0e72ed7f-b622-4853-a6c5-f10cd2e48598" width="600"><br>
 
+7. [관리자]회원 목록 CRUD 및 CSV, XLSX 파일 다운로드 기능<br>
+<img src="https://github.com/Ellings/ZEBRA/assets/108660734/22815df2-ac2c-4deb-b033-5c97fda23525" width="600"><br>
+
+
 ## Updating...
 
 <!--
